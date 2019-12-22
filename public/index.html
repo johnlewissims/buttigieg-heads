@@ -52,12 +52,21 @@
             'assets/bernie-v1.png',
             { frameWidth: 32, frameHeight: 48 }
         );
+        this.load.audio('panic', ['assets/music/panic.mp3']);
+        this.load.audio('sorry', ['assets/music/effects/sorry.mp3']);
     }
 
     function create ()
     {
-      this.add.image(400, 300, 'sky');
 
+      var bgMusic = this.sound.add('panic');
+
+      bgMusic.play({
+        volume: .3,
+        loop: true
+      })
+
+      this.add.image(400, 300, 'sky');
       platforms = this.physics.add.staticGroup();
 
       platforms.create(400, 568, 'ground').setScale(2).refreshBody();
@@ -144,6 +153,12 @@
 
         score += 10;
         scoreText.setText('Score: ' + score);
+
+        var sorry = this.sound.add('sorry')
+        sorry.play({
+          volume: 5,
+          loop: false
+        })
     }
 
 </script>
